@@ -43,7 +43,7 @@
         android:layout_below="@id/topLayout"
         android:id="@+id/tableLayout"
         >
-        <TableRow
+        <LinearLayout
             android:background="#909090"
             >
             <TextView
@@ -75,6 +75,6 @@
                 android:layout_weight="1"
                 android:textStyle="bold"
                 android:text="Size" />
-        </TableRow>
+        </LinearLayout>
     </TableLayout>
 </RelativeLayout>
