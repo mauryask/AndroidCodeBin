@@ -1,63 +1,86 @@
 package com.googel.camera2api;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.TextViewCompat;
-
-import android.graphics.Color;
 import android.os.Bundle;
-import android.text.PrecomputedText;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
 
-import com.googel.camera2api.databinding.ActivityMainBinding;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
-    private ActivityMainBinding binding;
+    private List<TableData> mList;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(LayoutInflater.from(this));
-        setContentView(binding.getRoot());
+        setContentView(R.layout.activity_main);
 
-        LinearLayout row = new LinearLayout(this);
-        row.setBackgroundColor(Color.parseColor("#909090"));
+        mList = new ArrayList<>();
+        addData();
+        RecyclerView tableRecyclerView = findViewById(R.id.tableRecyclerView);
+        tableRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        TableAdapter adapter = new TableAdapter(mList);
+        tableRecyclerView.setAdapter(adapter);
+    }
 
-        TextView txtView1 = new TextView(this);
-        TextView txtView2 = new TextView(this);
-        TextView txtView3 = new TextView(this);
+    /**
+     * TODO: Also implement total file size limitation
+     * TODO: Convert the file size to MB and KB accordingly
+     * TODO: implement if selected file size is greater than 6 MB do not select it
+     * */
 
+    /*
+    * import java.io.File;
 
-        LinearLayout.LayoutParams params1 = (LinearLayout.LayoutParams) txtView1.getLayoutParams();
-        txtView1.setText("1");
-        txtView1.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        txtView1.setGravity(Gravity.CENTER);
-        params1.weight = 1;
-        txtView1.setLayoutParams(params1);
+public class FileSizeUtil
+* {
+    public static String getFileSize(File file) {
+        long fileSizeInBytes = file.length();
+        double fileSizeInKB = fileSizeInBytes / 1024.0;
+        double fileSizeInMB = fileSizeInKB / 1024.0;
 
-        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) txtView2.getLayoutParams();
-        txtView2.setText("image1.jpg");
-        txtView2.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        txtView2.setGravity(Gravity.CENTER);
-        params2.weight = 3;
-        txtView2.setLayoutParams(params2);
+        String formattedFileSize;
+        if (fileSizeInMB >= 1) {
+            formattedFileSize = String.format("%.1f MB", fileSizeInMB);
+        } else {
+            formattedFileSize = String.format("%.1f KB", fileSizeInKB);
+        }
 
-        LinearLayout.LayoutParams params3 = (LinearLayout.LayoutParams) txtView3.getLayoutParams();
-        txtView3.setText("3021.356 KB");
-        txtView3.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        txtView3.setGravity(Gravity.CENTER);
-        params3.weight = 1;
-        txtView3.setLayoutParams(params3);
-
-        row.addView(txtView1);
-        row.addView(txtView2);
-        row.addView(txtView3);
-
-        binding.tableLayout.addView(row);
+        return formattedFileSize;
     }
 }
+    * */
+
+    private void addData()
+    {
+        TableData tableData = new TableData();
+        tableData.setSerialNo("No");
+        tableData.setFileName("File Name");
+        tableData.setFileSize("Capacity");
+        mList.add(tableData);
+
+        for(int i=1; i<=5; i++)
+        {
+            tableData = new TableData();
+            tableData.setSerialNo(i+"");
+            String fileName = "65185_165156.jpg";
+
+            if(fileName.length() > 13)
+            {
+                String s1 = fileName.substring(0,5);
+                String s2 = fileName.substring(fileName.length()-6);
+                fileName = s1 + ".." + s2;
+            }
+
+            tableData.setFileName(fileName);
+            tableData.setFileSize("1.23MB");
+            mList.add(tableData);
+        }
+    }
+}
+
+/*
+*
+* */

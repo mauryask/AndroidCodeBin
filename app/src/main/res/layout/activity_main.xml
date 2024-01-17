@@ -1,80 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tableRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/black"
-        android:id="@+id/topLayout"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="@drawable/tab_shape"
-            android:id="@+id/productInfoTab"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Product Info"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                />
-        </LinearLayout>
-        <ImageButton
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_width="70dp"
-            android:layout_height="35dp"
-            android:src="@drawable/outline_camera_alt_24"
-            android:background="@drawable/tab_shape"
-            />
-    </RelativeLayout>
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/topLayout"
-        android:id="@+id/tableLayout"
-        >
-        <LinearLayout
-            android:background="#909090"
-            >
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_margin="1dp"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:text="Serial" />
-            <TextView
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:layout_marginVertical="1dp"
-                android:layout_marginEnd="1dp"
-                android:background="@color/white"
-                android:textStyle="bold"
-                android:text="File name" />
-            <TextView
-                android:layout_marginVertical="1dp"
-                android:layout_marginEnd="1dp"
-                android:gravity="center"
-                android:layout_width="0dp"
-                android:background="@color/white"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textStyle="bold"
-                android:text="Size" />
-        </LinearLayout>
-    </TableLayout>
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:background="#f1f2f2"
+        />
+</LinearLayout>
