@@ -11,6 +11,8 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <!-- Customize your theme here. -->
     </style>
 
@@ -24,15 +26,24 @@
 
     <style name="StyleCenterTextView" parent="@style/StyleLeftTextView">
         <item name="android:layout_marginVertical" tools:ignore="NewApi">1dp</item>
-        <item name="android:layout_marginEnd" >1dp</item>
-        <item name="android:layout_marginStart" >0dp</item>
+        <item name="android:layout_marginEnd">1dp</item>
+        <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_weight">3</item>
     </style>
 
     <style name="StyleRightTextView" parent="@style/StyleLeftTextView">
         <item name="android:layout_marginVertical" tools:ignore="NewApi">1dp</item>
-        <item name="android:layout_marginEnd" >1dp</item>
-        <item name="android:layout_marginStart" >0dp</item>
+        <item name="android:layout_marginEnd">1dp</item>
+        <item name="android:layout_marginStart">0dp</item>
         <item name="android:layout_weight">1</item>
     </style>
+
+    <style name="Theme.Camera2API.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.Camera2API.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.Camera2API.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
