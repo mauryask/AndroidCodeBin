@@ -1,51 +1,43 @@
 package com.googel.camera2api;
 
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity
 {
-    Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        toolbar.setNavigationIcon(R.drawable.baseline_arrow_left_24);
-        toolbar.setContentInsetsRelative(0,0);
-        setSupportActionBar(toolbar);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        List<TableData> mList = new ArrayList<>();
+        populateList(mList);
+        TableAdapter tableAdapter = new TableAdapter(this, mList);
+        recyclerView.setAdapter(tableAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    private void populateList(List<TableData> mList)
     {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+       String[]  fileName = {"usbvasbdfahsbd.png", "isndgndfb_uigdsf63765.jpeg",
+               "uiasbdf6834.gif", "651565815765_6155.jpg", "uyasdb_7345364.png"};
+       String[] fileSize = {"125.02KB", "684.KB", "5.36MB", "7.23MB", "10.23MB"};
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item)
-    {
-        if(item.getItemId() == android.R.id.home)
-        {
-            Toast.makeText(this, "Clicked back icon.", Toast.LENGTH_SHORT).show();
-        }
-        else if (item.getItemId() == R.id.nav_camera)
-        {
-            Toast.makeText(this, "Clicked camera icon.", Toast.LENGTH_SHORT).show();
-        }
-        return super.onOptionsItemSelected(item);
+       for(int i=0; i<5; i++)
+       {
+           TableData data = new TableData();
+           data.setItemIndex(i+1);
+           data.setFileName(fileName[i]);
+           data.setFileSize(fileSize[i]);
+           mList.add(data);
+       }
     }
 }
 
