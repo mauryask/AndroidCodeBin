@@ -1,43 +1,51 @@
 package com.googel.camera2api;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity
 {
+    EditText editText;
+    ImageView searchButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<TableData> mList = new ArrayList<>();
-        populateList(mList);
-        TableAdapter tableAdapter = new TableAdapter(this, mList);
-        recyclerView.setAdapter(tableAdapter);
+
+        editText = findViewById(R.id.editTextSearch);
+        searchButton = findViewById(R.id.searchButton);
+
+        searchButton.setOnClickListener(view -> {
+            String enteredText = editText.getText().toString();
+            callMe(enteredText);
+        });
+
+        editText.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || (keyEvent != null && keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                String enteredText = editText.getText().toString();
+                callMe(enteredText);
+                return true;
+            }
+            return false;
+        });
     }
 
-    private void populateList(List<TableData> mList)
+    private void callMe(String text)
     {
-       String[]  fileName = {"usbvasbdfahsbd.png", "isndgndfb_uigdsf63765.jpeg",
-               "uiasbdf6834.gif", "651565815765_6155.jpg", "uyasdb_7345364.png"};
-       String[] fileSize = {"125.02KB", "684.KB", "5.36MB", "7.23MB", "10.23MB"};
-
-       for(int i=0; i<5; i++)
-       {
-           TableData data = new TableData();
-           data.setItemIndex(i+1);
-           data.setFileName(fileName[i]);
-           data.setFileSize(fileSize[i]);
-           mList.add(data);
-       }
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }
 
